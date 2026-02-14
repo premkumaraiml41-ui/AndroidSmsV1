@@ -4,7 +4,6 @@ sealed class AppScreen(
     val route: String,
     val title: String
 ) {
-
     // Send Screens
     object SendV1 : AppScreen("send_v1", "Send V1")
     object SendV2 : AppScreen("send_v2", "Send V2")
@@ -12,6 +11,10 @@ sealed class AppScreen(
     // Inbox Screens
     object InboxV1 : AppScreen("inbox_v1", "Inbox V1")
     object InboxV2 : AppScreen("inbox_v2", "Inbox V2")
+
+    // Inbox Screens for Incoming
+    object InboxIncomingV1 : AppScreen("inbox_incoming_v1", "Incoming V1")
+    object InboxIncomingV2 : AppScreen("inbox_incoming_v2", "Incoming V2")
 
     companion object {
 
@@ -27,7 +30,12 @@ sealed class AppScreen(
                 DrawerSection(
                     title = "Inbox",
                     children = listOf(InboxV1, InboxV2)
-                )
+                ),
+
+                       DrawerSection(
+                        title = "Incoming",
+                children = listOf(InboxIncomingV1, InboxIncomingV2)
+            )
             )
     }
 }
