@@ -1,153 +1,149 @@
-# 📱 Material 3 SMS App
+# 📱 SMS Architecture Demo App
 
-A modern Android SMS sending application built using **Jetpack Compose**, **Material 3 (Material You)**, and **MVVM Architecture**.
+Jetpack Compose + Material 3 + MVVM
 
-This project demonstrates clean architecture principles, reactive state management using `StateFlow`, runtime permission handling, and proper separation of concerns.
+------------------------------------------------------------------------
 
-It is designed as a scalable foundation for production-level SMS-based Android applications.
+## 📖 Overview
 
----
+This project is a modern Android SMS application built using Jetpack
+Compose and Material 3.\
+It is designed from a **developer architecture perspective**, focusing
+on scalability, clean structure, and maintainability.
 
-# 📸 App Preview
+This app demonstrates:
 
-> Add your screenshots inside a folder named `screenshots/` and reference them below.
+-   Clean MVVM architecture
+-   Repository pattern
+-   Model-driven expandable drawer navigation
+-   Version-based screen structure (V1, V2)
+-   Reading Incoming and Sent SMS
+-   Separation of concerns between UI and business logic
 
-## 🏠 Main Screen
-![SMS Screen](screenshots/sms_screen.png)
+This is not just an SMS app --- it is an architecture learning project.
 
-## 🌙 Dark Mode (Optional)
-![Dark Mode](screenshots/dark_mode.png)
+------------------------------------------------------------------------
 
----
+## 🏗 Architecture
 
-# 🚀 Features
+The application follows layered architecture:
 
-- ✅ Send SMS using `SmsManager`
-- ✅ Multipart SMS support for long messages
-- ✅ MVVM architecture
-- ✅ StateFlow-based reactive UI
-- ✅ Material 3 (Material You) UI
-- ✅ Dynamic color support (Android 12+)
-- ✅ Runtime permission handling
-- ✅ Clean and modular project structure
-- ✅ Loading state handling
-- ✅ Error handling and status feedback
+MainActivity\
+→ AppDrawer (Navigation UI Layer)\
+→ AppNavHost (Routing Layer)\
+→ Screens (UI Layer)\
+→ ViewModel (State Layer)\
+→ Repository (Data Layer)\
+→ Android SMS Content Provider
 
----
+Each layer has a single responsibility.
 
-# 🏗 Architecture Overview
+------------------------------------------------------------------------
 
-This project follows **MVVM (Model–View–ViewModel)** architecture.
+## 📂 Project Structure
 
+com.example.smsapp
 
-### 🔹 UI Layer
-- Built entirely using Jetpack Compose
-- Observes `StateFlow` from ViewModel
-- Reacts automatically to state changes
+-   AppScreen.kt → Navigation model
+-   MainActivity.kt → Entry point
 
-### 🔹 ViewModel Layer
-- Holds UI state using `MutableStateFlow`
-- Exposes immutable `StateFlow`
-- Contains UI-related logic
+ui/ - navigation/ - AppDrawer.kt - AppNavHost.kt - components/ -
+AppTopBar.kt - inbox/ - v1/ - v2/ - incoming/ - v1/ - send/
 
-### 🔹 Repository Layer
-- Handles SMS sending logic
-- Communicates with `SmsManager`
-- Returns success/failure result
+viewmodel/ - InboxViewModel.kt
 
----
+data/ - SmsReaderRepository.kt - SmsMessage.kt
 
-# 📁 Project Structure
+------------------------------------------------------------------------
 
+## 🧭 Navigation System
 
-This structure keeps the project scalable and maintainable.
+Navigation is model-driven using `AppScreen` and `DrawerSection`.
 
----
+To add a new drawer section:
 
-# 🧠 Tech Stack
+1.  Add a new object inside `AppScreen`
+2.  Add it to `drawerStructure`
+3.  Register route inside `AppNavHost`
 
-| Technology | Purpose |
-|------------|----------|
-| Kotlin | Programming Language |
-| Jetpack Compose | Modern UI Toolkit |
-| Material 3 | UI Components |
-| MVVM | Architecture Pattern |
-| StateFlow | Reactive State Management |
-| SmsManager | SMS Sending API |
-| Coroutines | Async & Flow Handling |
+No changes are required inside drawer UI logic.
 
----
+------------------------------------------------------------------------
 
-# ⚙️ Setup & Installation
+## ✉ SMS Features
 
-## 1️⃣ Clone Repository
+### Send SMS
 
+Uses Android `SmsManager`.
 
-## 2️⃣ Open in Android Studio
+### Read Incoming SMS
 
-- Open project
-- Sync Gradle
-- Run on physical device
+Uses: Telephony.Sms.Inbox.CONTENT_URI
 
-## 3️⃣ Required Permission
+### Read Sent SMS
 
-Add to `AndroidManifest.xml`:
+Uses: Telephony.Sms.Sent.CONTENT_URI
 
-```xml
-<uses-permission android:name="android.permission.SEND_SMS"/>
+### Conversation Grouping (Inbox V2)
 
-1.1.1
+Messages grouped by sender using Kotlin `groupBy`.
 
-send sms perfect
+------------------------------------------------------------------------
 
-1.1.2
+## 🧠 ViewModel Strategy
 
-read sms perfect
+Uses `StateFlow` for reactive UI updates.
 
-1.1.3
+-   UI observes state
+-   ViewModel loads data
+-   Repository handles SMS queries
+-   UI contains no business logic
 
-inbox v2 perfect
+------------------------------------------------------------------------
 
-1.1.4
+## 🗄 Repository Layer
 
-topBar added
+All SMS queries are handled using Android `ContentResolver`.
 
-1.1.5
+Incoming messages → Inbox URI\
+Outgoing messages → Sent URI
 
-topBar perfect for all
+Filtering logic belongs strictly in the repository layer.
 
-1.1.6
+------------------------------------------------------------------------
 
-topBar nice colours
+## 🔐 Permissions
 
-1.1.7
+The app uses:
 
-topBar no crash
+-   READ_SMS
+-   SEND_SMS
 
-1.1.8
+Runtime permission handling is implemented.
 
-topBar nice
+------------------------------------------------------------------------
 
-1.1.9
+## 🚀 Scalability
 
-now working on mainactivity modular
+This architecture allows:
 
-1.1.10
+-   Adding new drawer sections without modifying drawer UI
+-   Adding new feature versions (V1, V2) safely
+-   Extending into conversation screens
+-   Adding unread badge counts
+-   Supporting future MVI or Paging upgrades
 
-mainactivity is now small
+------------------------------------------------------------------------
 
-1.1.11
+## 🎯 Purpose
 
-side nav perfect dynamic
+This repository demonstrates how to evolve from:
 
-1.1.12
+"Make it work"
 
-Incoming started
+to
 
-1.1.13
+"Make it scalable and maintainable."
 
-Outgoing started
-
-1.1.14
-
-Incoming and Outgoing perfect in V1 only
+It serves as a structured example of modern Android development using
+Jetpack Compose.
