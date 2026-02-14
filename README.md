@@ -131,3 +131,7 @@ topBar nice
 1.1.9
 
 now working on mainactivity modular
+
+1.1.10
+
+mainactivity is now small
