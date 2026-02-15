@@ -1,4 +1,4 @@
-package com.example.smsapp.ui.outgoing.v3
+package com.example.smsapp.ui.outgoing.v4
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -25,10 +25,10 @@ import com.example.smsapp.viewmodel.TimeGroup
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OutgoingScreenV3(
+fun OutgoingScreenV4(
     viewModel: InboxViewModel = viewModel(),
     openDrawer: () -> Unit,
-    inHeadLabel: String = "Outgoing V3"
+    inHeadLabel: String = "Outgoing V4"
 ) {
     val grouped by viewModel.grouped.collectAsState()
     var tab by remember { mutableStateOf(TimeGroup.TODAY) }
@@ -51,9 +51,11 @@ fun OutgoingScreenV3(
                 .padding(padding)
                 .fillMaxSize()
         ) {
+            val counts = grouped.mapValues { it.value.size }
 
             OutgoingTabs(
                 selected = tab,
+                counts = counts,
                 onSelected = { tab = it }
             )
 

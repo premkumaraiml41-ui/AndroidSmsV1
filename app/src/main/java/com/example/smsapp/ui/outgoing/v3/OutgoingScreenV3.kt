@@ -51,9 +51,11 @@ fun OutgoingScreenV3(
                 .padding(padding)
                 .fillMaxSize()
         ) {
+            val counts = grouped.mapValues { it.value.size }
 
             OutgoingTabs(
                 selected = tab,
+                counts = counts,
                 onSelected = { tab = it }
             )
 

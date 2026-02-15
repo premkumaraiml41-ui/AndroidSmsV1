@@ -9,15 +9,28 @@ import com.example.smsapp.viewmodel.TimeGroup
 @Composable
 fun OutgoingTabs(
     selected: TimeGroup,
+    counts: Map<TimeGroup, Int>,
     onSelected: (TimeGroup) -> Unit
 ) {
+
     TabRow(selectedTabIndex = selected.ordinal) {
-        TimeGroup.values().forEach { group ->
+
+        TimeGroup.entries.forEach { group ->
+            val count = counts[group] ?: 0
+            val title = "${group.title()} ($count)"
+
             Tab(
                 selected = selected == group,
                 onClick = { onSelected(group) },
-                text = { Text(group.name) }
+                text = { Text(title) }
             )
         }
     }
+}
+
+private fun TimeGroup.title(): String = when (this) {
+    TimeGroup.TODAY -> "Today"
+    TimeGroup.YESTERDAY -> "Yesterday"
+    TimeGroup.THIS_MONTH -> "This Month"
+    TimeGroup.OLDER -> "Older"
 }
