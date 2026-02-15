@@ -21,6 +21,8 @@ sealed class AppScreen(
     // Inbox Screens for Outgoing
     object OutgoingV1 : AppScreen("outgoing_v1", "Outgoing V1")
     object OutgoingV2 : AppScreen("outgoing_v2", "Outgoing V2")
+    object OutgoingV3 : AppScreen("outgoing_v3", "Outgoing V3")
+    object OutgoingV4 : AppScreen("outgoing_v4", "Outgoing V4")
 
     companion object {
 
@@ -45,7 +47,7 @@ sealed class AppScreen(
 
                 DrawerSection(
                     title = "Outgoing",
-                    children = listOf(OutgoingV1, OutgoingV2)
+                    children = listOf(OutgoingV1, OutgoingV2,OutgoingV3, OutgoingV4)
                 )
             )
     }

@@ -1,4 +1,4 @@
-package com.example.smsapp.ui.outgoing.v2
+package com.example.smsapp.ui.outgoing.v3
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -17,16 +17,18 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.smsapp.ui.components.AppTopBar
+import com.example.smsapp.ui.outgoing.components.OutgoingTabs
 import com.example.smsapp.viewmodel.InboxViewModel
 import com.example.smsapp.viewmodel.TimeGroup
+import com.example.smsapp.ui.outgoing.components.OutgoingMessageList
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OutgoingScreenV2(
+fun OutgoingScreenV3(
     viewModel: InboxViewModel = viewModel(),
     openDrawer: () -> Unit,
-    inHeadLabel: String = "Outgoing V2"
+    inHeadLabel: String = "Outgoing V3"
 ) {
     val context = LocalContext.current
     val grouped by viewModel.grouped.collectAsState()
@@ -67,50 +69,14 @@ fun OutgoingScreenV2(
                 .fillMaxSize()
         ) {
 
-            TabRow(selectedTabIndex = tab.ordinal) {
-                TimeGroup.values().forEach {
-                    Tab(
-                        selected = tab == it,
-                        onClick = { tab = it },
-                        text = { Text(it.name) }
-                    )
-                }
-            }
+            OutgoingTabs(
+                selected = tab,
+                onSelected = { tab = it }
+            )
 
-            LazyColumn(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                items(grouped[tab] ?: emptyList()) { sms ->
-
-                    Card(
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxWidth()
-                    ) {
-                        Column(modifier = Modifier.padding(12.dp)) {
-
-                            Text(
-                                text = sms.address,
-                                style = MaterialTheme.typography.titleMedium
-                            )
-
-                            Spacer(modifier = Modifier.height(4.dp))
-
-                            Text(
-                                text = sms.body,
-                                style = MaterialTheme.typography.bodyMedium
-                            )
-
-                            Spacer(modifier = Modifier.height(4.dp))
-
-                            Text(
-                                text = sms.date,
-                                style = MaterialTheme.typography.labelSmall
-                            )
-                        }
-                    }
-                }
-            }
+            OutgoingMessageList(
+                messages = grouped[tab] ?: emptyList()
+            )
         }
     }
 }

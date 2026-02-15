@@ -1,5 +1,7 @@
 package com.example.smsapp.ui.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -11,9 +13,11 @@ import com.example.smsapp.ui.inbox.v2.InboxScreenV2
 import com.example.smsapp.ui.incoming.v1.IncomingScreenV1
 import com.example.smsapp.ui.outgoing.v1.OutgoingScreenV1
 import com.example.smsapp.ui.outgoing.v2.OutgoingScreenV2
+import com.example.smsapp.ui.outgoing.v3.OutgoingScreenV3
 import com.example.smsapp.ui.sendsms.v2.SendSmsScreenV2
 import com.example.smsapp.ui.sendsms.v3.SendSmsScreenV3
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppNavHost(
     navController: NavHostController,
@@ -54,6 +58,10 @@ fun AppNavHost(
 
         composable(AppScreen.OutgoingV2.route) {
             OutgoingScreenV2(openDrawer = openDrawer)
+        }
+
+        composable(AppScreen.OutgoingV3.route) {
+            OutgoingScreenV3(openDrawer = openDrawer)
         }
 
     }
