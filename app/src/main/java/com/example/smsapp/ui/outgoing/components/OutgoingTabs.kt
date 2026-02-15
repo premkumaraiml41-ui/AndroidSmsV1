@@ -22,7 +22,17 @@ fun OutgoingTabs(
             Tab(
                 selected = selected == group,
                 onClick = { onSelected(group) },
-                text = { Text(title) }
+                text = {
+                    val count = counts[group] ?: 0
+
+                    androidx.compose.animation.AnimatedContent(
+                        targetState = count,
+                        label = ""
+                    ) { animatedCount ->
+
+                        Text("${group.title()} ($animatedCount)")
+                    }
+                }
             )
         }
     }

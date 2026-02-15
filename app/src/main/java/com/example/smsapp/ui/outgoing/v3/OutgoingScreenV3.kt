@@ -60,7 +60,8 @@ fun OutgoingScreenV3(
             )
 
             OutgoingMessageList(
-                messages = grouped[tab] ?: emptyList()
+                messages = grouped[tab] ?: emptyList(),
+                group = tab
             )
         }
     }
