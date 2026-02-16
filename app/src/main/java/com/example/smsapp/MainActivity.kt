@@ -2,10 +2,12 @@ package com.example.smsapp
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.rememberDrawerState
@@ -23,9 +25,11 @@ class MainActivity : ComponentActivity() {
             ActivityResultContracts.RequestPermission()
         ) {}
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestSmsPermission()
+        requestContactsPermission()
 
         setContent {
             MaterialTheme {
@@ -56,4 +60,15 @@ class MainActivity : ComponentActivity() {
             requestPermissionLauncher.launch(Manifest.permission.SEND_SMS)
         }
     }
+
+    private fun requestContactsPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_CONTACTS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
+        }
+    }
+
 }

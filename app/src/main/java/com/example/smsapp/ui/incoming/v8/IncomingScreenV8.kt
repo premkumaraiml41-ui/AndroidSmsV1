@@ -1,4 +1,4 @@
-package com.example.smsapp.ui.incoming.v7
+package com.example.smsapp.ui.incoming.v8
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,23 +17,26 @@ import com.example.smsapp.ui.components.AppTopBar
 import com.example.smsapp.ui.incoming.common.IncomingPermission
 import com.example.smsapp.ui.incoming.common.groupBySender
 import com.example.smsapp.ui.incoming.common.loadIncomingSms
-import com.example.smsapp.ui.incoming.conversationtypes.groupbysender.IncomingConversationListGroupSender
 import com.example.smsapp.ui.incoming.conversationtypes.groupbysenderV1.IncomingConversationListGroupSenderV1
+import com.example.smsapp.contacts.data.loadContacts
+import com.example.smsapp.ui.incoming.common.groupBySenderV1
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun IncomingScreenV7(
+fun IncomingScreenV8(
     openDrawer: () -> Unit,
     navigateToThread: (String) -> Unit,
-    inHeadLabel: String = "Incoming V7"
+    inHeadLabel: String = "Incoming V8"
 ) {
     val context = LocalContext.current
     var messages by remember { mutableStateOf<List<SmsMessage>>(emptyList()) }
+    var contactsMap by remember { mutableStateOf<Map<String, String>>(emptyMap()) }
 
-    val conversations = remember(messages) { groupBySender(messages) }
+    val conversations = remember(messages, contactsMap) { groupBySenderV1(messages, contactsMap) }
 
     IncomingPermission(context) {
         messages = loadIncomingSms(context)
+        contactsMap = loadContacts(context)
     }
 
     Scaffold(
@@ -42,9 +45,11 @@ fun IncomingScreenV7(
         }
     )
     { padding ->
-        Column(Modifier
-            .padding(padding)
-            .fillMaxSize()) {
+        Column(
+            Modifier
+                .padding(padding)
+                .fillMaxSize()
+        ) {
             IncomingConversationListGroupSenderV1(
                 conversations = conversations,
                 modifier = Modifier.fillMaxSize(),

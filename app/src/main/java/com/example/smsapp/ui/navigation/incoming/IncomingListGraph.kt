@@ -13,6 +13,7 @@ import com.example.smsapp.ui.incoming.v4.IncomingScreenV4
 import com.example.smsapp.ui.incoming.v5.IncomingScreenV5
 import com.example.smsapp.ui.incoming.v6.IncomingScreenV6
 import com.example.smsapp.ui.incoming.v7.IncomingScreenV7
+import com.example.smsapp.ui.incoming.v8.IncomingScreenV8
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.incomingListGraph(
@@ -69,6 +70,15 @@ fun NavGraphBuilder.incomingListGraph(
 
     composable(AppScreen.InboxIncomingV7.route) {
         IncomingScreenV7(
+            openDrawer = openDrawer,
+            navigateToThread = { address ->
+                navController.navigate("incoming_v6_thread?address=$address")
+            }
+        )
+    }
+
+    composable(AppScreen.InboxIncomingV8.route) {
+        IncomingScreenV8(
             openDrawer = openDrawer,
             navigateToThread = { address ->
                 navController.navigate("incoming_v6_thread?address=$address")

@@ -4,8 +4,10 @@ import com.example.smsapp.data.SmsMessage
 import com.example.smsapp.ui.incoming.model.IncomingConversation
 import com.example.smsapp.utils.normalizeAddress
 
-fun groupBySender(messages: List<SmsMessage>): List<IncomingConversation> {
-
+fun groupBySenderV1(
+    messages: List<SmsMessage>,
+    contactsMap: Map<String, String>
+): List<IncomingConversation> {
     val grouped = messages.groupBy { normalizeAddress(it.address) }
 
     return grouped.map { (address, msgs) ->
@@ -13,7 +15,7 @@ fun groupBySender(messages: List<SmsMessage>): List<IncomingConversation> {
         val latest = msgs.maxByOrNull { it.date.toLongOrNull() ?: 0L }!!
 
         IncomingConversation(
-            address = address,
+            address = contactsMap[address] ?: address,
             lastMessage = latest.body,
             lastTimestamp = latest.date.toLongOrNull() ?: 0L,
             count = msgs.size,
