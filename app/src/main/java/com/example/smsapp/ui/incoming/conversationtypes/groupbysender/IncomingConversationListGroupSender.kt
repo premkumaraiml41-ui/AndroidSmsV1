@@ -1,4 +1,4 @@
-package com.example.smsapp.ui.incoming.v6
+package com.example.smsapp.ui.incoming.conversationtypes.groupbysender
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -8,7 +8,7 @@ import com.example.smsapp.ui.incoming.common.IncomingEmptyState
 import com.example.smsapp.ui.incoming.v5.model.IncomingConversation
 
 @Composable
-fun IncomingConversationListV6(
+fun IncomingConversationListGroupSender(
     conversations: List<IncomingConversation>,
     modifier: Modifier = Modifier,
     onOpenConversation: (String) -> Unit
@@ -21,7 +21,7 @@ fun IncomingConversationListV6(
 
     LazyColumn(modifier = modifier) {
         items(conversations) { convo ->
-            IncomingConversationItemV6(convo, onOpenConversation)
+            IncomingConversationItemGroupSender(convo, onOpenConversation)
         }
     }
 }

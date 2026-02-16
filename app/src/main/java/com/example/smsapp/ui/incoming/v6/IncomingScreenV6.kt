@@ -17,6 +17,7 @@ import com.example.smsapp.ui.components.AppTopBar
 import com.example.smsapp.ui.incoming.common.IncomingPermission
 import com.example.smsapp.ui.incoming.common.groupBySender
 import com.example.smsapp.ui.incoming.common.loadIncomingSms
+import com.example.smsapp.ui.incoming.conversationtypes.groupbysender.IncomingConversationListGroupSender
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,8 +25,7 @@ fun IncomingScreenV6(
     openDrawer: () -> Unit,
     navigateToThread: (String) -> Unit,
     inHeadLabel: String = "Incoming V6"
-)
-{
+) {
     val context = LocalContext.current
     var messages by remember { mutableStateOf<List<SmsMessage>>(emptyList()) }
 
@@ -41,12 +41,13 @@ fun IncomingScreenV6(
         }
     )
     { padding ->
-        Column(Modifier.padding(padding).fillMaxSize()) {
-
-            IncomingConversationListV6(
+        Column(Modifier
+            .padding(padding)
+            .fillMaxSize()) {
+            IncomingConversationListGroupSender(
                 conversations = conversations,
                 modifier = Modifier.fillMaxSize(),
-                onOpenConversation = { address->
+                onOpenConversation = { address ->
                     navigateToThread(address)
                 }
             )

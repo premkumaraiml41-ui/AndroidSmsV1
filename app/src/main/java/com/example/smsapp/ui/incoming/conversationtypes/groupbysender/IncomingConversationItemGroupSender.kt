@@ -13,7 +13,7 @@ import com.example.smsapp.ui.common.SmartTimeFormatter
 import com.example.smsapp.ui.incoming.v5.model.IncomingConversation
 
 @Composable
-fun IncomingConversationItemGroupBySender(
+fun IncomingConversationItemGroupSender(
     convo: IncomingConversation,
     onOpenConversation: (String) -> Unit
 ) {
