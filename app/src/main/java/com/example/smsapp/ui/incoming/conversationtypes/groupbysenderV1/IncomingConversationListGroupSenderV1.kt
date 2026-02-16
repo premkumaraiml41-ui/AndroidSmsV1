@@ -5,16 +5,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.smsapp.ui.incoming.common.IncomingEmptyState
-import com.example.smsapp.ui.incoming.conversationtypes.groupbysender.IncomingConversationItemGroupSender
-import com.example.smsapp.ui.incoming.model.IncomingConversation
+import com.example.smsapp.ui.incoming.model.IncomingConversationV1
 
 @Composable
 fun IncomingConversationListGroupSenderV1(
-    conversations: List<IncomingConversation>,
+    conversations: List<IncomingConversationV1>,
     modifier: Modifier = Modifier,
-    onOpenConversation: (String) -> Unit
+    onOpenConversation: (IncomingConversationV1) -> Unit
 ) {
-
     if (conversations.isEmpty()) {
         IncomingEmptyState()
         return
@@ -22,7 +20,9 @@ fun IncomingConversationListGroupSenderV1(
 
     LazyColumn(modifier = modifier) {
         items(conversations) { convo ->
-            IncomingConversationItemGroupSenderV1(convo, onOpenConversation)
+            IncomingConversationItemGroupSenderV1(convo) {
+                onOpenConversation(convo)
+            }
         }
     }
 }

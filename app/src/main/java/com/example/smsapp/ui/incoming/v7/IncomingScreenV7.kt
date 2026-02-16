@@ -18,7 +18,6 @@ import com.example.smsapp.ui.incoming.common.IncomingPermission
 import com.example.smsapp.ui.incoming.common.groupBySender
 import com.example.smsapp.ui.incoming.common.loadIncomingSms
 import com.example.smsapp.ui.incoming.conversationtypes.groupbysender.IncomingConversationListGroupSender
-import com.example.smsapp.ui.incoming.conversationtypes.groupbysenderV1.IncomingConversationListGroupSenderV1
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,7 +44,7 @@ fun IncomingScreenV7(
         Column(Modifier
             .padding(padding)
             .fillMaxSize()) {
-            IncomingConversationListGroupSenderV1(
+            IncomingConversationListGroupSender(
                 conversations = conversations,
                 modifier = Modifier.fillMaxSize(),
                 onOpenConversation = { address ->

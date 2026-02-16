@@ -17,20 +17,27 @@ import com.example.smsapp.utils.normalizeAddress
 @Composable
 fun IncomingConversationThreadScreenV8(
     address: String,
+    title: String = "",
     openDrawer: () -> Unit
 ) {
 
     val context = LocalContext.current
     var messages by remember { mutableStateOf<List<SmsMessage>>(emptyList()) }
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(address) {
+        val normalizedTarget = normalizeAddress(address)
+
         messages = loadIncomingSms(context)
-            .filter { normalizeAddress(it.address) == address }
+            .filter { normalizeAddress(it.address) == normalizedTarget }
     }
 
     Scaffold(
         topBar = {
-            AppTopBar(title = address, showBack = true, onBackClick = openDrawer)
+            AppTopBar(
+                title = title.ifBlank { address },
+                showBack = true,
+                onBackClick = openDrawer
+            )
         }
     ) { padding ->
 

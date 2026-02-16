@@ -15,7 +15,6 @@ import androidx.compose.ui.platform.LocalContext
 import com.example.smsapp.data.SmsMessage
 import com.example.smsapp.ui.components.AppTopBar
 import com.example.smsapp.ui.incoming.common.IncomingPermission
-import com.example.smsapp.ui.incoming.common.groupBySender
 import com.example.smsapp.ui.incoming.common.loadIncomingSms
 import com.example.smsapp.ui.incoming.conversationtypes.groupbysenderV1.IncomingConversationListGroupSenderV1
 import com.example.smsapp.contacts.data.loadContacts
@@ -25,7 +24,7 @@ import com.example.smsapp.ui.incoming.common.groupBySenderV1
 @Composable
 fun IncomingScreenV8(
     openDrawer: () -> Unit,
-    navigateToThread: (String) -> Unit,
+    navigateToThread: (String, String) -> Unit,
     inHeadLabel: String = "Incoming V8"
 ) {
     val context = LocalContext.current
@@ -53,8 +52,8 @@ fun IncomingScreenV8(
             IncomingConversationListGroupSenderV1(
                 conversations = conversations,
                 modifier = Modifier.fillMaxSize(),
-                onOpenConversation = { address ->
-                    navigateToThread(address)
+                onOpenConversation = { convo ->
+                    navigateToThread(convo.phoneNumber, convo.address)
                 }
             )
         }

@@ -10,11 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.smsapp.ui.common.SmartTimeFormatter
-import com.example.smsapp.ui.incoming.model.IncomingConversation
+import com.example.smsapp.ui.incoming.model.IncomingConversationV1
 
 @Composable
 fun IncomingConversationItemGroupSenderV1(
-    convo: IncomingConversation,
+    convo: IncomingConversationV1,
     onOpenConversation: (String) -> Unit
 ) {
     Card(
