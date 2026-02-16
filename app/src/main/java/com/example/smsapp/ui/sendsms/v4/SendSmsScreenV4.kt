@@ -1,4 +1,4 @@
-package com.example.smsapp.ui.sendsms.v3
+package com.example.smsapp.ui.sendsms.v4
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -25,12 +25,12 @@ import com.example.smsapp.viewmodel.SmsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SendSmsScreenV3(
+fun SendSmsScreenV4(
     viewModel: SmsViewModel = viewModel(),
     openDrawer: () -> Unit,
     prefillPhone: String = "",
     prefillMessage: String = "",
-    title: String = "Send SMS V3"
+    title: String = "Send SMS V4"
 )
 {
     val state by viewModel.uiState.collectAsState()

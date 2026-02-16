@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.smsapp.data.SmsMessage
 import androidx.compose.material.icons.filled.Send
+import com.example.smsapp.ui.incoming.common.IncomingEmptyState
 
 @Composable
 fun IncomingListUIForV3(
@@ -19,7 +20,7 @@ fun IncomingListUIForV3(
 ) {
 
     if (messages.isEmpty()) {
-        IncomingEmptyStateV3()
+        IncomingEmptyState()
         return
     }
 

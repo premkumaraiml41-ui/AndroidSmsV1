@@ -1,4 +1,4 @@
-package com.example.smsapp.ui.incoming.v4
+package com.example.smsapp.ui.incoming.common
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun IncomingEmptyStateV3() {
+fun IncomingEmptyState() {
 
     Box(
         modifier = Modifier.fillMaxSize(),

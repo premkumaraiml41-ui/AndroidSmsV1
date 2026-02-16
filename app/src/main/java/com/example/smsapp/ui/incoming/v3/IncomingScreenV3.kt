@@ -11,8 +11,9 @@ import androidx.compose.ui.platform.LocalContext
 import com.example.smsapp.ui.components.AppTopBar
 import com.example.smsapp.data.SmsMessage
 import com.example.smsapp.ui.incoming.common.IncomingPermission
+import com.example.smsapp.ui.incoming.common.groupIncoming
 import com.example.smsapp.ui.incoming.common.loadIncomingSms
-import com.example.smsapp.ui.incoming.v2.IncomingListUIForV2
+import com.example.smsapp.ui.incoming.common.IncomingTimeGroup
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

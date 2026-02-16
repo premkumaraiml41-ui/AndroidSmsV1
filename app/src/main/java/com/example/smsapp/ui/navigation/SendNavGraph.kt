@@ -38,4 +38,23 @@ fun NavGraphBuilder.sendGraph(
             prefillMessage = msg
         )
     }
+
+    composable(
+        route = AppScreen.SendV4.route + "?phone={phone}&msg={msg}",
+        arguments = listOf(
+            navArgument("phone") { defaultValue = "" },
+            navArgument("msg") { defaultValue = "" }
+        )
+    ) { backStack ->
+
+        val phone = backStack.arguments?.getString("phone") ?: ""
+        val msg = backStack.arguments?.getString("msg") ?: ""
+
+        SendSmsScreenV3(
+            openDrawer = openDrawer,
+            prefillPhone = phone,
+            prefillMessage = msg
+        )
+    }
+
 }

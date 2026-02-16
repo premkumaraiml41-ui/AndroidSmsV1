@@ -9,6 +9,7 @@ import com.example.smsapp.AppScreen
 import com.example.smsapp.ui.incoming.v1.IncomingScreenV1
 import com.example.smsapp.ui.incoming.v2.IncomingScreenV2
 import com.example.smsapp.ui.incoming.v3.IncomingScreenV3
+import com.example.smsapp.ui.incoming.v4.IncomingScreenV4
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.incomingGraph(
@@ -26,6 +27,17 @@ fun NavGraphBuilder.incomingGraph(
 
     composable(AppScreen.InboxIncomingV3.route) {
         IncomingScreenV3(
+            openDrawer = openDrawer,
+            navigateToSend = { phone, msg ->
+                navController.navigate(
+                    AppScreen.SendV3.route + "?phone=$phone&msg=$msg"
+                )
+            }
+        )
+    }
+
+    composable(AppScreen.InboxIncomingV4.route) {
+        IncomingScreenV4(
             openDrawer = openDrawer,
             navigateToSend = { phone, msg ->
                 navController.navigate(

@@ -1,7 +1,6 @@
-package com.example.smsapp.ui.incoming.v3
+package com.example.smsapp.ui.incoming.common
 
 import com.example.smsapp.data.SmsMessage
-import com.example.smsapp.ui.incoming.common.IncomingTimeGroup
 import java.util.*
 
 fun groupIncoming(messages: List<SmsMessage>): Map<IncomingTimeGroup, List<SmsMessage>> {

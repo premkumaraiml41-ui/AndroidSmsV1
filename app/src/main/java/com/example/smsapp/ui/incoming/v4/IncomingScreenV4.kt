@@ -1,4 +1,4 @@
-package com.example.smsapp.ui.incoming.v3
+package com.example.smsapp.ui.incoming.v4
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,15 +11,16 @@ import androidx.compose.ui.platform.LocalContext
 import com.example.smsapp.ui.components.AppTopBar
 import com.example.smsapp.data.SmsMessage
 import com.example.smsapp.ui.incoming.common.IncomingPermission
+import com.example.smsapp.ui.incoming.common.IncomingTimeGroup
+import com.example.smsapp.ui.incoming.common.groupIncoming
 import com.example.smsapp.ui.incoming.common.loadIncomingSms
-import com.example.smsapp.ui.incoming.v2.IncomingListUIForV2
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun IncomingScreenV3(
+fun IncomingScreenV4(
     openDrawer: () -> Unit,
     navigateToSend: (String, String) -> Unit,
-    inHeadLabel: String = "Incoming V3"
+    inHeadLabel: String = "Incoming V4"
 )
 {
     val context = LocalContext.current
@@ -41,13 +42,13 @@ fun IncomingScreenV3(
     { padding ->
         Column(Modifier.padding(padding).fillMaxSize()) {
 
-            IncomingTabsV3(
+            IncomingTabsV4(
                 selected = selectedGroup,
                 onSelected = { selectedGroup = it },
                 counts = grouped.mapValues { it.value.size }
             )
 
-            IncomingListUIForV3(
+            IncomingListUIForV4(
                 messages = filteredMessages,
                 modifier = Modifier.fillMaxSize(),
                 onOpenClick = { sms ->
