@@ -21,7 +21,10 @@ fun AppNavHost(
 
         InboxGraph(openDrawer = openDrawer)
 
-        incomingGraph(openDrawer = openDrawer)
+        incomingGraph(
+            navController = navController,
+            openDrawer = openDrawer
+        )
 
         outgoingGraph(
             navController = navController,

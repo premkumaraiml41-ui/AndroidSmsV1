@@ -12,8 +12,13 @@ fun OutgoingMessageListV6(
     messages: List<SmsMessage>,
     tick: Int,
     onItemClick: (SmsMessage) -> Unit
-)
-{
+) {
+
+    if (messages.isEmpty()) {
+        OutgoingEmptyStateV6()
+        return
+    }
+
     LazyColumn {
         items(messages) { sms ->
             OutgoingMessageItemV6(

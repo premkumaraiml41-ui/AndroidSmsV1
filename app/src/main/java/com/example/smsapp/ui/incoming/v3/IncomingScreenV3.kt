@@ -18,8 +18,10 @@ import com.example.smsapp.ui.incoming.v2.IncomingListUIForV2
 @Composable
 fun IncomingScreenV3(
     openDrawer: () -> Unit,
+    navigateToSend: (String, String) -> Unit,
     inHeadLabel: String = "Incoming V3"
-) {
+)
+{
     val context = LocalContext.current
     var messages by remember { mutableStateOf<List<SmsMessage>>(emptyList()) }
     var selectedGroup by remember { mutableStateOf(IncomingTimeGroup.TODAY) }
@@ -47,7 +49,10 @@ fun IncomingScreenV3(
 
             IncomingListUIForV3(
                 messages = filteredMessages,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
+                onOpenClick = { sms ->
+                    navigateToSend(sms.address, sms.body)
+                }
             )
         }
     }

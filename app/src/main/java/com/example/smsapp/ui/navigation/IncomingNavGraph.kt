@@ -12,6 +12,7 @@ import com.example.smsapp.ui.incoming.v3.IncomingScreenV3
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.incomingGraph(
+    navController: NavController,
     openDrawer: () -> Unit
 ) {
 
@@ -24,6 +25,13 @@ fun NavGraphBuilder.incomingGraph(
     }
 
     composable(AppScreen.InboxIncomingV3.route) {
-        IncomingScreenV3(openDrawer = openDrawer)
+        IncomingScreenV3(
+            openDrawer = openDrawer,
+            navigateToSend = { phone, msg ->
+                navController.navigate(
+                    AppScreen.SendV3.route + "?phone=$phone&msg=$msg"
+                )
+            }
+        )
     }
 }
